@@ -1,7 +1,6 @@
 package com.example.bechestday.controller;
 
 import com.example.bechestday.dto.TrainingDTO;
-import com.example.bechestday.exception.NotFoundException;
 import com.example.bechestday.service.training.TrainingService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

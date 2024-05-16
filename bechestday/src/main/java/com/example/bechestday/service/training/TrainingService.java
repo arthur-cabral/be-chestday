@@ -1,6 +1,5 @@
 package com.example.bechestday.service.training;
 
-import com.example.bechestday.dto.ExerciseDTO;
 import com.example.bechestday.dto.TrainingDTO;
 
 import java.util.List;
