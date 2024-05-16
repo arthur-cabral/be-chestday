@@ -45,6 +45,7 @@ public class TrainingController {
     @PutMapping("/{id}")
     public ResponseEntity<TrainingDTO> PutTraining(@PathVariable Long id, @RequestBody TrainingDTO trainingDTO){
         try {
+            trainingDTO.setTrainingId(id);
             TrainingDTO trainingList = trainingService.PutTraining(trainingDTO);
             return ResponseEntity.ok().body(trainingList);
         } catch (Exception ex){
