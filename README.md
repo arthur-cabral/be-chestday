@@ -7,7 +7,7 @@ Backend of a project focused in gym stuff
 - Clone the project
 
 ```bash
-  git clone [https://link-para-o-projeto](https://github.com/arthur-cabral/be-chestday)
+  git clone https://github.com/arthur-cabral/be-chestday
 ```
 
 - Update dependencies in pom.xml, if needed
