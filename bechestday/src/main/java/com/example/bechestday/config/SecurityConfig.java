@@ -1,6 +1,7 @@
 package com.example.bechestday.config;
 
 import com.example.bechestday.security.jwt.JwtTokenFilter;
+import com.example.bechestday.security.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,12 @@ public class SecurityConfig {
     @Value("${security.jwt.token.secret-key:secret}")
     private final String secretKey = "secret";
 
+    private final JwtTokenProvider jwtTokenProvider;
+
+    public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtTokenFilter jwtAuthenticationFilter) throws Exception {
         http
@@ -35,6 +42,11 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
+    }
+
+    @Bean
+    public JwtTokenFilter jwtTokenFilter() {
+        return new JwtTokenFilter(jwtTokenProvider);
     }
 
     @Bean
