@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("exercise")
+@RequestMapping("/exercise")
 public class ExerciseController {
 
     private final ExerciseService exerciseService;
