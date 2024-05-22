@@ -16,6 +16,10 @@ public class Permission implements GrantedAuthority {
     public Permission() {
     }
 
+    public Permission(String description) {
+        this.description = description;
+    }
+
     @Override
     public String getAuthority() {
         return this.description;
