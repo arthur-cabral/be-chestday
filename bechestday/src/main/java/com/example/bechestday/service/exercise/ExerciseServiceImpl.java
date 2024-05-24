@@ -23,16 +23,16 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public List<ExerciseDTO> GetAllExercises() {
+    public List<ExerciseDTO> getAllExercises() {
         List<Exercise> exerciseList = exerciseRepository.findAll();
 
         return Collections.singletonList(modelMapper.map(exerciseList, ExerciseDTO.class));
     }
 
     @Override
-    public ExerciseDTO GetExerciseById(Long id) throws Exception {
+    public ExerciseDTO getExerciseById(Long id) throws Exception {
         try{
-            return modelMapper.map(FindExerciseById(id), ExerciseDTO.class);
+            return modelMapper.map(findExerciseById(id), ExerciseDTO.class);
         } catch (NotFoundException ex){
             throw new NotFoundException(ex.getMessage());
         } catch (Exception ex){
@@ -40,7 +40,7 @@ public class ExerciseServiceImpl implements ExerciseService {
         }
     }
 
-    private Optional<Exercise> FindExerciseById(Long id) throws NotFoundException {
+    private Optional<Exercise> findExerciseById(Long id) throws NotFoundException {
         Optional<Exercise> exercise = exerciseRepository.findById(id);
         if (exercise.isEmpty()){
             throw new NotFoundException("Exercicio nao encontrado");
@@ -49,7 +49,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public ExerciseDTO PostExercise(ExerciseDTO exerciseDTO) throws Exception {
+    public ExerciseDTO postExercise(ExerciseDTO exerciseDTO) throws Exception {
         try{
             Exercise exercise = modelMapper.map(exerciseDTO, Exercise.class);
             var newExercise = exerciseRepository.save(exercise);
@@ -61,9 +61,9 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public ExerciseDTO PutExercise(ExerciseDTO exerciseDTO) throws Exception {
+    public ExerciseDTO putExercise(ExerciseDTO exerciseDTO) throws Exception {
         try{
-            FindExerciseById(exerciseDTO.getExerciseId());
+            findExerciseById(exerciseDTO.getExerciseId());
 
             Exercise exercise = modelMapper.map(exerciseDTO, Exercise.class);
             exercise.setExerciseId(exerciseDTO.getExerciseId());
@@ -78,9 +78,9 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public void DeleteExercise(Long id) throws Exception {
+    public void deleteExercise(Long id) throws Exception {
         try{
-            exerciseRepository.delete(modelMapper.map(FindExerciseById(id), Exercise.class));
+            exerciseRepository.delete(modelMapper.map(findExerciseById(id), Exercise.class));
         } catch (Exception ex){
             throw new Exception(ex.getMessage());
         }

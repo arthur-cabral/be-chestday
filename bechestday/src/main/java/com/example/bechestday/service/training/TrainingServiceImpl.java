@@ -23,22 +23,22 @@ public class TrainingServiceImpl implements TrainingService{
     }
 
     @Override
-    public List<TrainingDTO> GetAllTrainings() {
+    public List<TrainingDTO> getAllTrainings() {
         List<Training> trainingList = trainingRepository.findAll();
 
         return Collections.singletonList(modelMapper.map(trainingList, TrainingDTO.class));
     }
 
     @Override
-    public TrainingDTO GetTrainingById(Long id) throws Exception {
+    public TrainingDTO getTrainingById(Long id) throws Exception {
         try {
-            return modelMapper.map(FindTrainingById(id), TrainingDTO.class);
+            return modelMapper.map(findTrainingById(id), TrainingDTO.class);
         } catch (Exception ex){
             throw new Exception(ex.getMessage());
         }
     }
 
-    private Optional<Training> FindTrainingById(Long id) throws NotFoundException {
+    private Optional<Training> findTrainingById(Long id) throws NotFoundException {
         Optional<Training> training = trainingRepository.findById(id);
         if (training.isEmpty()){
             throw new NotFoundException("Treino nao encontrado");
@@ -47,7 +47,7 @@ public class TrainingServiceImpl implements TrainingService{
     }
 
     @Override
-    public TrainingDTO PostTraining(TrainingDTO trainingDTO) throws Exception {
+    public TrainingDTO postTraining(TrainingDTO trainingDTO) throws Exception {
         try{
             Training training = modelMapper.map(trainingDTO, Training.class);
             var newTraining = trainingRepository.save(training);
@@ -59,9 +59,9 @@ public class TrainingServiceImpl implements TrainingService{
     }
 
     @Override
-    public TrainingDTO PutTraining(TrainingDTO trainingDTO) throws Exception {
+    public TrainingDTO putTraining(TrainingDTO trainingDTO) throws Exception {
         try {
-            FindTrainingById(trainingDTO.getTrainingId());
+            findTrainingById(trainingDTO.getTrainingId());
 
             Training training = modelMapper.map(trainingDTO, Training.class);
             training.setTrainingId(trainingDTO.getTrainingId());
@@ -74,9 +74,9 @@ public class TrainingServiceImpl implements TrainingService{
     }
 
     @Override
-    public void DeleteTraining(Long id) throws Exception {
+    public void deleteTraining(Long id) throws Exception {
         try{
-            trainingRepository.delete(modelMapper.map(FindTrainingById(id), Training.class));
+            trainingRepository.delete(modelMapper.map(findTrainingById(id), Training.class));
         } catch (Exception ex){
             throw new Exception(ex.getMessage());
         }

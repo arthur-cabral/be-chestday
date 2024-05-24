@@ -18,15 +18,15 @@ public class ExerciseController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ExerciseDTO>> GetAllExercises(){
-        List<ExerciseDTO> exerciseList = exerciseService.GetAllExercises();
+    public ResponseEntity<List<ExerciseDTO>> getAllExercises(){
+        List<ExerciseDTO> exerciseList = exerciseService.getAllExercises();
         return ResponseEntity.ok().body(exerciseList);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ExerciseDTO> GetExerciseById(@PathVariable Long id) {
+    public ResponseEntity<ExerciseDTO> getExerciseById(@PathVariable Long id) {
         try{
-            ExerciseDTO exercise = exerciseService.GetExerciseById(id);
+            ExerciseDTO exercise = exerciseService.getExerciseById(id);
             return ResponseEntity.ok().body(exercise);
         } catch (Exception ex){
             return ResponseEntity.notFound().build();
@@ -34,9 +34,9 @@ public class ExerciseController {
     }
 
     @PostMapping
-    public ResponseEntity<ExerciseDTO> PostExercise(@RequestBody ExerciseDTO exerciseDTO){
+    public ResponseEntity<ExerciseDTO> postExercise(@RequestBody ExerciseDTO exerciseDTO){
         try{
-            ExerciseDTO exercise = exerciseService.PostExercise(exerciseDTO);
+            ExerciseDTO exercise = exerciseService.postExercise(exerciseDTO);
             return ResponseEntity.ok().body(exercise);
         } catch (Exception ex){
             return ResponseEntity.badRequest().build();
@@ -44,10 +44,10 @@ public class ExerciseController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ExerciseDTO> PutExercise(@PathVariable Long id, @RequestBody ExerciseDTO exerciseDTO){
+    public ResponseEntity<ExerciseDTO> putExercise(@PathVariable Long id, @RequestBody ExerciseDTO exerciseDTO){
         try{
             exerciseDTO.setExerciseId(id);
-            ExerciseDTO exercise = exerciseService.PutExercise(exerciseDTO);
+            ExerciseDTO exercise = exerciseService.putExercise(exerciseDTO);
             return ResponseEntity.ok().body(exercise);
         } catch (Exception ex){
             return ResponseEntity.notFound().build();
@@ -55,9 +55,9 @@ public class ExerciseController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ExerciseDTO> DeleteExercise(@PathVariable Long id){
+    public ResponseEntity<ExerciseDTO> deleteExercise(@PathVariable Long id){
         try{
-            exerciseService.DeleteExercise(id);
+            exerciseService.deleteExercise(id);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
             return ResponseEntity.notFound().build();

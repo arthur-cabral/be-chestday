@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface ExerciseService {
 
-    List<ExerciseDTO> GetAllExercises();
-    ExerciseDTO GetExerciseById(Long id) throws Exception;
-    ExerciseDTO PostExercise(ExerciseDTO exerciseDTO) throws Exception;
-    ExerciseDTO PutExercise(ExerciseDTO exerciseDTO) throws Exception;
-    void DeleteExercise(Long id) throws Exception;
+    List<ExerciseDTO> getAllExercises();
+    ExerciseDTO getExerciseById(Long id) throws Exception;
+    ExerciseDTO postExercise(ExerciseDTO exerciseDTO) throws Exception;
+    ExerciseDTO putExercise(ExerciseDTO exerciseDTO) throws Exception;
+    void deleteExercise(Long id) throws Exception;
 }

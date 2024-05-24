@@ -17,15 +17,15 @@ public class TrainingController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TrainingDTO>> GetAllTrainings(){
-        List<TrainingDTO> trainingList = trainingService.GetAllTrainings();
+    public ResponseEntity<List<TrainingDTO>> getAllTrainings(){
+        List<TrainingDTO> trainingList = trainingService.getAllTrainings();
         return ResponseEntity.ok().body(trainingList);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TrainingDTO> GetTrainingById(@PathVariable Long id){
+    public ResponseEntity<TrainingDTO> getTrainingById(@PathVariable Long id){
         try {
-            TrainingDTO trainingList = trainingService.GetTrainingById(id);
+            TrainingDTO trainingList = trainingService.getTrainingById(id);
             return ResponseEntity.ok().body(trainingList);
         } catch (Exception ex){
             return ResponseEntity.notFound().build();
@@ -33,20 +33,20 @@ public class TrainingController {
     }
 
     @PostMapping()
-    public ResponseEntity<TrainingDTO> PostTraining(@RequestBody TrainingDTO trainingDTO){
+    public ResponseEntity<?> postTraining(@RequestBody TrainingDTO trainingDTO){
         try {
-            TrainingDTO trainingList = trainingService.PostTraining(trainingDTO);
+            TrainingDTO trainingList = trainingService.postTraining(trainingDTO);
             return ResponseEntity.ok().body(trainingList);
         } catch (Exception ex){
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TrainingDTO> PutTraining(@PathVariable Long id, @RequestBody TrainingDTO trainingDTO){
+    public ResponseEntity<TrainingDTO> putTraining(@PathVariable Long id, @RequestBody TrainingDTO trainingDTO){
         try {
             trainingDTO.setTrainingId(id);
-            TrainingDTO trainingList = trainingService.PutTraining(trainingDTO);
+            TrainingDTO trainingList = trainingService.putTraining(trainingDTO);
             return ResponseEntity.ok().body(trainingList);
         } catch (Exception ex){
             return ResponseEntity.badRequest().build();
@@ -54,9 +54,9 @@ public class TrainingController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<TrainingDTO> DeleteTraining(@PathVariable Long id){
+    public ResponseEntity<TrainingDTO> deleteTraining(@PathVariable Long id){
         try {
-            trainingService.DeleteTraining(id);
+            trainingService.deleteTraining(id);
             return ResponseEntity.noContent().build();
         } catch (Exception ex){
             return ResponseEntity.notFound().build();

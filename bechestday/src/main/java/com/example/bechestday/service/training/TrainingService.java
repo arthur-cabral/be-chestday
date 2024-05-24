@@ -5,9 +5,9 @@ import com.example.bechestday.dto.TrainingDTO;
 import java.util.List;
 
 public interface TrainingService {
-    List<TrainingDTO> GetAllTrainings();
-    TrainingDTO GetTrainingById(Long id) throws Exception;
-    TrainingDTO PostTraining(TrainingDTO trainingDTO) throws Exception;
-    TrainingDTO PutTraining(TrainingDTO trainingDTO) throws Exception;
-    void DeleteTraining(Long id) throws Exception;
+    List<TrainingDTO> getAllTrainings();
+    TrainingDTO getTrainingById(Long id) throws Exception;
+    TrainingDTO postTraining(TrainingDTO trainingDTO) throws Exception;
+    TrainingDTO putTraining(TrainingDTO trainingDTO) throws Exception;
+    void deleteTraining(Long id) throws Exception;
 }
