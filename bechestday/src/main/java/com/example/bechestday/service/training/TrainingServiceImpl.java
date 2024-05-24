@@ -9,9 +9,10 @@ import com.example.bechestday.repository.TrainingRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TrainingServiceImpl implements TrainingService{
@@ -30,7 +31,9 @@ public class TrainingServiceImpl implements TrainingService{
     public List<TrainingDTO> getAllTrainings() {
         List<Training> trainingList = trainingRepository.findAll();
 
-        return Collections.singletonList(modelMapper.map(trainingList, TrainingDTO.class));
+        return trainingList.stream()
+                .map(training -> modelMapper.map(training, TrainingDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
