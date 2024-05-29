@@ -1,6 +1,7 @@
 package com.example.bechestday.controller;
 
 import com.example.bechestday.dto.TrainingDTO;
+import com.example.bechestday.exception.NotFoundException;
 import com.example.bechestday.service.training.TrainingService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +49,9 @@ public class TrainingController {
             trainingDTO.setTrainingId(id);
             TrainingDTO trainingList = trainingService.putTraining(trainingDTO);
             return ResponseEntity.ok().body(trainingList);
-        } catch (Exception ex){
+        } catch (NotFoundException ex) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception ex) {
             return ResponseEntity.badRequest().build();
         }
     }

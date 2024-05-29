@@ -97,7 +97,9 @@ public class TrainingServiceImpl implements TrainingService{
             var updatedTraining = trainingRepository.save(training);
 
             return modelMapper.map(updatedTraining, TrainingDTO.class);
-        } catch (Exception ex){
+        } catch (NotFoundException ex) {
+            throw new NotFoundException(ex.getMessage());
+        } catch (Exception ex) {
             throw new Exception(ex.getMessage());
         }
     }
